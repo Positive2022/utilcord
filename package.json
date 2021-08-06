@@ -1,0 +1,23 @@
+{
+  "name": "utilcord",
+  "version": "1.0.0",
+  "description": "\"# utilcord\" \r \"# utilcord\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Positive2022/utilcord.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Positive2022/utilcord/issues"
+  },
+  "homepage": "https://github.com/Positive2022/utilcord#readme",
+  "dependencies": {
+    "discord.js": "^13.0.0"
+  }
+}
