@@ -7,3 +7,6 @@ class Command {
         this.execute = properties.execute;
     }
 }
+
+
+module.exports = Command
