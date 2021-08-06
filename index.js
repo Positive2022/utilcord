@@ -1,1 +1,3 @@
-module.exports = {};
+module.exports = {
+  UtilsClient: require("./struct/client")
+};
