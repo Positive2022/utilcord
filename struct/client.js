@@ -58,7 +58,7 @@ class UtilsClient extends Client {
         }
     }
 
-    async handleCommand(interaction) {
+    handleCommand(interaction) {
         const { options, commandName } = interaction;
 
         const command = this.commands.get(commandName);
