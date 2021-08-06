@@ -1,3 +1,4 @@
+const { token } = require("./config.json");
 const { Intents } = require('discord.js');
 
 const { UtilsClient } = require('utilcord');
@@ -16,7 +17,7 @@ client.on('messageCreate', async message => {
         message.author.id === client.application?.owner.id &&
         message.content.startsWith('!deploy')
     ) {
-        client.deployCommands('TOKEN', client.user.id, message.GUILDS.id);
+        client.deployCommands(token, client.user.id, message.GUILDS.id);
         message.reply('Successfully deployed application (/) commands.');
     }
 });
@@ -24,3 +25,5 @@ client.on('messageCreate', async message => {
 client.on('interactionCreate', interaction => {
     client.handleCommand(interaction);
 });
+
+client.login(token);
