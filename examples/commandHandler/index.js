@@ -17,7 +17,7 @@ client.on('messageCreate', async message => {
         message.author.id === client.application?.owner.id &&
         message.content.startsWith('!deploy')
     ) {
-        client.deployCommands(token, client.user.id, message.GUILDS.id);
+        client.deployCommands(token, client.user.id, message.guild.id);
         message.reply('Successfully deployed application (/) commands.');
     }
 });
