@@ -32,7 +32,7 @@ class UtilsClient extends Client {
                 });
             }
         } catch (error) {
-            console.error(error);
+            throw new Error(error);
         }
     }
 }
