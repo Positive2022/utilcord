@@ -2,7 +2,7 @@ var Animals = ["dog", "cat", "duck", "bird", "panda", "wolf", "fox", "seal", "ll
 const fetch = require('node-fetch')
 class Animals {
     async image(options = {}) {
-        if (!options.Animals) {
+        if (!options || !options.Animals) {
             console.warn(`**You should choose animal from the following:** ${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}`)
             Animal = Animals[Math.floor(Math.random() * Animals.length)];
 
@@ -45,7 +45,7 @@ class Animals {
     }
 
     async fact(options = {}) {
-        if (!options.Animals) {
+        if (!options || !options.Animals) {
             console.warn(`**You should choose animal from the following:** ${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}`)
             try {
                 var res = await fetch("https://nekos.life/api/v2/fact")
