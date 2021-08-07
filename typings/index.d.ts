@@ -31,8 +31,8 @@ declare module 'utilcord' {
         public loadCommands(commandsDir: string): void;
         public deployCommands(
             token: string,
-            clientId: string,
-            guildId?: string
+            clientId: Snowflake,
+            guildId?: Snowflake
         ): Promise<void>;
         public handleCommand(interation: Interaction): unknown;
     }
