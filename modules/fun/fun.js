@@ -65,7 +65,7 @@ class Fun {
                 button.setStyle('SUCCESS');
                 button.setDisabled(true);
 
-                const res = _checkWin(gameArray, score[user.id]);
+                const res = this._checkWin(gameArray, score[user.id]);
                 if (res.win) {
                     message.components.forEach(r => r.components.forEach(c =>
                         c.setDisabled(true)
