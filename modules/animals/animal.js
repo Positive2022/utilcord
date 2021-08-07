@@ -3,15 +3,12 @@ const fetch = require('node-fetch')
 class Animals {
     async image(options = {}) {
         if (!options.Animals) {
-            console.warn(`**You should choose animal from the following:** \`${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}\``)
+            console.warn(`**You should choose animal from the following:** ${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}`)
             Animal = Animals[Math.floor(Math.random() * Animals.length)];
 
             if (['whale', 'koala', 'raccoon', 'kangaroo', 'red_panda'].includes(Animal.toLowerCase())) {
                 const data = await fetch(`https://some-random-api.ml/img/${args[0].toLowerCase()}`).then((res) => res.json());
                 return data.link
-            } else if (Animal.toLowerCase() == 'bunny') {
-                const data = await fetch("https://api.bunnies.io/v2/loop/random/?media=image,png").then((res) => res.json());
-                return data.media.image
             } else {
                 try {
                     res = await fetch(`https://apis.duncte123.me/animal/${Animal.toLowerCase()}`, {
@@ -25,15 +22,12 @@ class Animals {
                 if (!json.data || !json.data.file) throw new Error(`No Image found.`)
                 return json.data.file
             }
-        } else if (!Animals.includes(options.Animals.toLowerCase())) throw new Error(`**Choose animal from the following:** \`${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}\``)
+        } else if (!Animals.includes(options.Animals.toLowerCase())) throw new Error(`**Choose animal from the following:** ${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}`)
 
         try {
             if (['whale', 'koala', 'raccoon', 'kangaroo', 'red_panda'].includes(options.Animals.toLowerCase())) {
                 const data = await fetch(`https://some-random-api.ml/img/${options.Animals.toLowerCase()}`).then((res) => res.json());
                 return data.link
-            } else if (options.Animals.toLowerCase() == 'bunny') {
-                const data = await fetch("https://api.bunnies.io/v2/loop/random/?media=image,png").then((res) => res.json());
-                return data.media.image
             } else {
                 res = await fetch(`https://apis.duncte123.me/animal/${args[0].toLowerCase()}`, {
                     headers: {
@@ -52,7 +46,7 @@ class Animals {
 
     async fact(options = {}) {
         if (!options.Animals) {
-            console.warn(`**You should choose animal from the following:** \`${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}\``)
+            console.warn(`**You should choose animal from the following:** ${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}`)
             try {
                 var res = await fetch("https://nekos.life/api/v2/fact")
                 var json = await res.json();
@@ -63,7 +57,7 @@ class Animals {
             return json.fact;
 
         } else {
-            if (!Animals.includes(options.Animals.toLowerCase()) || options.Animals.toLowerCase() == 'bunny') throw new Error(`**You should choose animal from the following:** \`${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}\`\n\nNote: The animal bunny does not return any fact.`)
+            if (!Animals.includes(options.Animals.toLowerCase())) throw new Error(`**You should choose animal from the following:** ${Animals.map(Ani => Ani.charAt(0).toUpperCase() + Ani.slice(1)).join(", ")}`)
 
             try {
                 res = await fetch(`https://some-random-api.ml/facts/${options.Animals.toLowerCase()}`), json = await res.json();
@@ -71,10 +65,11 @@ class Animals {
             } catch (err) {
                 throw new Error(err)
             }
-            
+
             if (!json.fact) throw new Error(`No Fact.`)
             return json.fact
         }
     }
 }
+
 module.exports = Animals;
