@@ -1,7 +1,4 @@
 const Discord = require("discord.js");
-const {
-    EventEmitter
-} = require("events");
 class Tickets {
     /**
      * create Ticket channel
@@ -42,11 +39,7 @@ class Tickets {
 
     async closeTicket(message, member) {
         if (!message.guild.me.permissionsIn(message.channel).has([Discord.Permissions.FLAGS.MANAGE_CHANNELS, Discord.Permissions.FLAGS.MANAGE_ROLES])) return false;
-
         try {
-            await message.channel.updateOverwrite(message.guild.roles.everyone.id, {
-                VIEW_CHANNEL: false
-            })
             await message.channel.updateOverwrite(member.user, {
                 VIEW_CHANNEL: false
             })
