@@ -23,6 +23,7 @@
         "discord-api-types": "^0.22.0",
         "discord-ytdl-core": "^5.0.4",
         "discord.js": "^13.0.1",
+        "node-fetch": "^2.6.1",
         "parse-ms": "^3.0.0",
         "random-api-beta": "^1.1.0",
         "require-all": "^3.0.0"
