@@ -1,1 +1,1 @@
-module.exports = require('./anime')
+module.exports = require('./functions/anime')
