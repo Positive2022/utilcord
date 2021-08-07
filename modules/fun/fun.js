@@ -3,6 +3,30 @@ const {
     MessageButton
 } = require('discord.js');
 const fetch = require('node-fetch');
+const subReddits = [
+    'dankmeme',
+    'dankmemes',
+    'AdviceAnimals',
+    'MemeEconomy',
+    'ComedyCemetery',
+    'memes',
+    'PrequelMemes',
+    'terriblefacebookmemes',
+    'me_irl',
+    "comedyheaven",
+    "puns",
+    "wheredidthesodago",
+    "crappyoffbrands",
+    "im14andthisisdeep",
+    "trippinthroughtime",
+    "4chan",
+    "pewdiepiesubmissions",
+    "terriblefacebookmemes",
+    "funny",
+    'animemes',
+    'funny',
+    'teenagers'
+]
 class Fun {
 
     async ticTacToe({
@@ -115,6 +139,22 @@ class Fun {
             setup = json.setup,
             punchline = json.punchline
         }
+    }
+
+    async meme() {
+        const random = subReddits[Math.floor(Math.random() * subReddits.length)];
+        var response = await got(`https://www.reddit.com/r/${random}/random/.json`)
+        if (!response) throw new Error(`No meme found.`)
+        let content = JSON.parse(response.body);
+        let meme = content[0].data.children[0].data
+        Data = {
+            memeImage: meme.url,
+            memeTitle: meme.title,
+            memeUpvotes: meme.ups,
+            memeDownvotes: meme.downs,
+            memeNumComments: meme.num_comments
+        }
+        return Data;
     }
 }
 module.exports = Fun;
