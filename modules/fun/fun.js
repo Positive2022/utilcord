@@ -65,7 +65,7 @@ class Fun {
                 button.setStyle('SUCCESS');
                 button.setDisabled(true);
 
-                const res = checkWin(gameArray, score[user.id]);
+                const res = _checkWin(gameArray, score[user.id]);
                 if (res.win) {
                     message.components.forEach(r => r.components.forEach(c =>
                         c.setDisabled(true)
@@ -83,7 +83,7 @@ class Fun {
         playerTurn(user1);
     }
 
-    async checkWin(gameArray, scoreString) {
+    async _checkWin(gameArray, scoreString) {
         const userScore = scoreString.split('').sort().join(' ');
         if (
             /0.+1.+2/.test(userScore) ||
