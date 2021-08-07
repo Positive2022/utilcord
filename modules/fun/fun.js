@@ -2,6 +2,7 @@ const {
     MessageActionRow,
     MessageButton
 } = require('discord.js');
+const fetch = require('node-fetch');
 class Fun {
 
     async ticTacToe({
@@ -103,6 +104,17 @@ class Fun {
         };
         else return false;
     }
-}
 
+    async joke() {
+        var res = await fetch("http://official-joke-api.appspot.com/random_joke"),
+            json = await res.json();
+
+        if (!json.setup || !json.punchline) throw new Error(`No joke.`)
+
+        joke = {
+            setup = json.setup,
+            punchline = json.punchline
+        }
+    }
+}
 module.exports = Fun;
