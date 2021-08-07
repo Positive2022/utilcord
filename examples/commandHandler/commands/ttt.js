@@ -1,4 +1,4 @@
-const { ticTacToe } = require('utilcord');
+const { Fun } = require('utilcord');
 const { ApplicationCommandOptionType } = require('discord-api-types');
 const { Command } = require('utilcord');
 
@@ -24,6 +24,6 @@ module.exports = new Command({
         emojis[user1.id] = '❌';
         emojis[user2.id] = '⭕';
 
-        ticTacToe({ user1, user2, emojis, interaction });
+        (new Fun()).ticTacToe({ user1, user2, emojis, interaction });
     }
 });
