@@ -28,7 +28,9 @@ module.exports = new Command({
     },
     cooldown: 5,
     execute(client, interaction, options) {
-        const link = getanimalimage(options.get('animal'));
+        const animal = options.get('animal');
+        
+        const link = getanimalimage({ animal });
         const image = new MessageAttachment(link, 'animal.jpg');
 
         interaction.reply({ files: [image] });
