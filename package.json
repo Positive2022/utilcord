@@ -19,7 +19,9 @@
     "homepage": "https://github.com/Positive2022/utilcord#readme",
     "dependencies": {
         "@discordjs/rest": "^0.1.0-canary.0",
+        "@discordjs/voice": "^0.5.5",
         "discord-api-types": "^0.22.0",
+        "discord-ytdl-core": "^5.0.4",
         "discord.js": "^13.0.1",
         "parse-ms": "^3.0.0",
         "random-api-beta": "^1.1.0",
