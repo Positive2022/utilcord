@@ -19,10 +19,15 @@ async function ticTacToe({ user1, user2, emojis, interaction }) {
                 );
             }
 
-            const tttRow = new MessageActionRow().addComponents(...buttons);
+            const tttRow = [
+                new MessageActionRow().addComponents(...buttons.slice(0, 3)),
+                new MessageActionRow().addComponents(...buttons.slice(3, 6)),
+                new MessageActionRow().addComponents(...buttons.slice(6, 9))
+            ];
+            
             await interaction.reply({
                 content: `Tic Tac Toe! ${user}, it's your turn!`,
-                components: [tttRow]
+                components: tttRow
             });
 
             message = await interaction.fetchReply();
@@ -53,14 +58,14 @@ async function ticTacToe({ user1, user2, emojis, interaction }) {
 
             const res = checkWin(gameArray, score[user.id]);
             if (res.win) {
-                message.components[0].components.forEach(c =>
+                message.components.forEach(r => r.components.forEach(c =>
                     c.setDisabled(true)
-                );
+                ));
                 message.edit(`${user}, you're the winner!`);
             } else if (res.tie) {
-                message.components[0].components.forEach(c =>
+                message.components.forEach(r => r.components.forEach(c =>
                     c.setDisabled(true)
-                );
+                ));
                 message.edit(`It was a tie!`);
             } else playerTurn(user.id === user1.id ? user2 : user1, message);
         });
