@@ -1,8 +1,8 @@
 module.exports = {
-  UtilsClient: require('./struct/client'),
-  Command: require('./struct/command'),
-  Player: require('./modules/player/index'),
-  Fun: require('./modules/fun/fun'),
   Animals: require('./modules/animals/animal'),
-  Others: require('./modules/others/index')
+  Command: require('./struct/command'),
+  Fun: require('./modules/fun/fun'),
+  Player: require('./modules/player/index'),
+  Others: require('./modules/others/index'),
+  UtilsClient: require('./struct/client')
 };
