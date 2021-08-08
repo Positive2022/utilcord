@@ -9,7 +9,7 @@ class Starboard extends EventEmitter {
     ) {
         super();
 
-        if (!client?.constructor?.name === 'Client') {
+        if (client?.constructor?.name !== 'Client') {
             throw new Error('The client must be provided!');
         } else if (
             typeof saveStarboard !== 'function' ||
