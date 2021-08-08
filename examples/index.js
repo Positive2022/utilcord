@@ -1,4 +1,4 @@
-const { token } = require("./config.json");
+const { token } = require('./config.json');
 const { Intents } = require('discord.js');
 
 const { UtilsClient } = require('utilcord');
