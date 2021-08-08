@@ -5,7 +5,7 @@ class Minecraft {
         return img = `https://minecraftskinstealer.com/achievement/${emoji}/Achievement%20Unlocked!!/${options.text ? `${options.text}` : `Achievement Unlocked!`}`
     }
 
-    UserID() {
+    async UserID() {
         try {
             var res = await fetch(`https://mc-heads.net/minecraft/profile/${encodeURIComponent(args.join(' ').slice(0, 16) || 'Dream')}`);
             var json = await res.json();
