@@ -63,6 +63,8 @@ class UtilsClient extends Client {
         const command = this.commands.get(commandName);
         if (!command) return;
 
+        if (command.cooldown && typeof parseInt(command.cooldown) !== "number") throw new Error(`Cooldown should be a number.`)
+
         const { cooldowns } = this;
 
         if (!cooldowns.has(command.data.name)) {
