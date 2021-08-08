@@ -3,6 +3,7 @@ const {
     MessageButton
 } = require('discord.js');
 const fetch = require('node-fetch');
+const got = require('got')
 const subReddits = [
     'dankmeme',
     'dankmemes',
