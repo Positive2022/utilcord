@@ -20,6 +20,7 @@
     "dependencies": {
         "@discordjs/rest": "^0.1.0-canary.0",
         "@discordjs/voice": "^0.5.5",
+        "@promises/timer": "^0.5.0",
         "discord-api-types": "^0.22.0",
         "discord.js": "^13.0.1",
         "fs": "0.0.1-security",
