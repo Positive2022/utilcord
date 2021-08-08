@@ -6,7 +6,6 @@ const ms = require('parse-ms');
 class UtilsClient extends Client {
     constructor(options) {
         super(options);
-
         this.commands = new Collection();
         this.cooldowns = new Collection();
     }
@@ -64,6 +63,8 @@ class UtilsClient extends Client {
         const command = this.commands.get(commandName);
         if (!command) return;
 
+        if (command.cooldown && typeof parseInt(command.cooldown) !== "number") throw new Error(`Cooldown should be a number.`)
+
         const { cooldowns } = this;
 
         if (!cooldowns.has(command.data.name)) {
@@ -73,11 +74,10 @@ class UtilsClient extends Client {
         const now = Date.now();
 
         const timestamps = cooldowns.get(command.data.name);
-        const cooldownAmount = command.data.name * 1000;
+        const cooldownAmount = command.cooldown * 1000;
 
         if (timestamps.has(interaction.user.id)) {
-            const expirationTime =
-                timestamps.get(interaction.user.id) + cooldownAmount;
+            const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
             if (now < expirationTime) {
                 const timeLeft = ms(expirationTime - now);

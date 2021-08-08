@@ -136,8 +136,8 @@ class Fun {
         if (!json.setup || !json.punchline) throw new Error(`No joke.`)
 
         joke = {
-            setup = json.setup,
-            punchline = json.punchline
+            setup: json.setup,
+            punchline: json.punchline
         }
     }
 
