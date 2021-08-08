@@ -6,7 +6,6 @@ const ms = require('parse-ms');
 class UtilsClient extends Client {
     constructor(options) {
         super(options);
-
         this.commands = new Collection();
         this.cooldowns = new Collection();
     }
