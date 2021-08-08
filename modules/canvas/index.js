@@ -1,3 +1,4 @@
+const fetch = require('node-fetch')
 class Canvas {
 
     async avatar(interaction, userID, options = {}) {
