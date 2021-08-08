@@ -1,7 +1,7 @@
 const { Command } = require('utilcord');
 const { ApplicationCommandOptionType } = require('discord-api-types');
 const { MessageAttachment } = require('discord.js');
-const { getanimalimage } = require('random-api-beta');
+const { Animals } = require('utilcord');
 
 module.exports = new Command({
     data: {
@@ -30,9 +30,8 @@ module.exports = new Command({
     execute(client, interaction, options) {
         const animal = options.get('animal');
         
-        const link = getanimalimage({ animal });
-        const image = new MessageAttachment(link, 'animal.jpg');
-
+        const link = await Animals.image(({ Animals: animal }))
+        const image = new MessageAttachment(link, `${animal || 'animal'}.jpg`);
         interaction.reply({ files: [image] });
     }
 });
