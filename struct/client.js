@@ -72,7 +72,7 @@ class UtilsClient extends Client {
         const now = Date.now();
 
         const timestamps = cooldowns.get(command.data.name);
-        const cooldownAmount = command.data.cooldown * 1000;
+        const cooldownAmount = command.cooldown * 1000;
 
         if (timestamps.has(interaction.user.id)) {
             const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
