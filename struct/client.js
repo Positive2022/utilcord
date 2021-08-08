@@ -72,18 +72,19 @@ class UtilsClient extends Client {
         const now = Date.now();
 
         const timestamps = cooldowns.get(command.data.name);
-        const cooldownAmount = command.data.name * 1000;
+        const cooldownAmount = command.data.cooldown * 1000;
 
         if (timestamps.has(interaction.user.id)) {
-            const expirationTime =
-                timestamps.get(interaction.user.id) + cooldownAmount;
+            const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
 
             if (now < expirationTime) {
+                if (options.CooldownMsg && options.CooldownMsg == true) {
                 const timeLeft = ms(expirationTime - now);
                 return interaction.reply({
                     content: `Please wait ${timeLeft.minutes}m ${timeLeft.seconds}s before reusing the \`${command.data.name}\` command.`,
                     ephemeral: true
                 });
+                }
             }
         }
 

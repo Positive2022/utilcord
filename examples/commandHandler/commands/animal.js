@@ -12,6 +12,7 @@ module.exports = new Command({
                 name: 'animal',
                 type: ApplicationCommandOptionType.String,
                 description: 'The animal to show.',
+                cooldown: 2,
                 required: true,
                 choices: [
                     {

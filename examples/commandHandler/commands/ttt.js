@@ -6,6 +6,7 @@ module.exports = new Command({
     data: {
         name: 'tictactoe',
         description: 'Tic Tac Toe game!',
+        cooldown: 10,
         options: [
             {
                 name: 'user',
@@ -15,7 +16,6 @@ module.exports = new Command({
             }
         ]
     },
-    cooldown: 10,
     execute(client, interaction, options) {
         const user1 = interaction.user;
         const user2 = options.get('user').user;
