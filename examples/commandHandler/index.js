@@ -1,12 +1,12 @@
-const  token = "get token somehow"
+const  token = "NzIwNTY3OTk5MTEwNTc4MTk2.XuH3Pg.D0PiPsUkuLxWesZT9FTgaZi9tE0"
+const { Intents } = require('discord.js');
 const Discord = require('discord.js')
-var intent = new Discord.Intents(Object.values(Discord.Intents.FLAGS))
-intent.remove(['GUILD_PRESENCES', 'DIRECT_MESSAGE_REACTIONS', 'DIRECT_MESSAGE_TYPING', 'GUILD_MESSAGE_TYPING']) // Your intents.
+var intent = new Intents(Object.values(Intents.FLAGS))
+intent.remove(['GUILD_PRESENCES', 'DIRECT_MESSAGE_REACTIONS', 'DIRECT_MESSAGE_TYPING', 'GUILD_MESSAGE_TYPING'])
 
 const { UtilsClient } = require('utilcord');
 const client = new UtilsClient({
     intents: intent,
-    //Enable cache by commenting them out.
         makeCache: Discord.Options.cacheWithLimits({
         //ApplicationCommandManager: 0,
         //BaseGuildEmojiManager: 0,
@@ -32,7 +32,9 @@ const client = new UtilsClient({
     allowedMentions: {
         parse: ['roles'],
         repliedUser: true
-    }
+    },
+    messageCacheMaxSize: 1,
+    messageCacheLifetime: 1000,
 });
 
 client.on('ready', async () => {
