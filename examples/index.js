@@ -40,9 +40,11 @@ const client = new UtilsClient({
 client.on('ready', async () => {
     client.loadCommands(__dirname + '/commands');
     if (!client.application?.owner) await client.application?.fetch();
-    client.guilds.cache.forEach(async g => {
+    /*client.guilds.cache.forEach(async g => {
         client.deployCommands(token, client.user.id, g.id);
-    })
+    })*/// for setting commands for each guild ^^
+    client.deployCommands(token, client.user.id);
+    // For setting commands to client ^^
 });
 
 client.on('interactionCreate', interaction => {
