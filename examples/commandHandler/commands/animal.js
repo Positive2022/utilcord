@@ -8,6 +8,7 @@ module.exports = new Command({
         name: 'animal',
         description: 'Shows an image of an animal!',
         cooldown: 2,
+        cooldown: 5,
         options: [
             {
                 name: 'animal',
@@ -27,7 +28,6 @@ module.exports = new Command({
             }
         ]
     },
-    cooldown: 5,
     execute(client, interaction, options) {
         const animal = options.get('animal');
         

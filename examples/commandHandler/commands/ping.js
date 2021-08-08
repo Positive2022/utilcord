@@ -3,9 +3,9 @@ const {
 } = require('utilcord');
 
 module.exports = new Command({
+    cooldown: 10,
     data: {
         name: 'ping',
-        cooldown: 10,
         description: 'Replies with pong!'
     },
     execute(client, interaction, options) {

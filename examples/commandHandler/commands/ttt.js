@@ -3,10 +3,10 @@ const { ApplicationCommandOptionType } = require('discord-api-types');
 const { Command } = require('utilcord');
 
 module.exports = new Command({
+    cooldown: 10,
     data: {
         name: 'tictactoe',
         description: 'Tic Tac Toe game!',
-        cooldown: 10,
         options: [
             {
                 name: 'user',
