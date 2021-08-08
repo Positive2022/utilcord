@@ -1,4 +1,4 @@
-const  token = "NzIwNTY3OTk5MTEwNTc4MTk2.XuH3Pg.D0PiPsUkuLxWesZT9FTgaZi9tE0"
+const  token = "get token"
 const { Intents } = require('discord.js');
 const Discord = require('discord.js')
 var intent = new Intents(Object.values(Intents.FLAGS))
