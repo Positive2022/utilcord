@@ -43,10 +43,8 @@ class Starboard extends EventEmitter {
         selfStar = true,
         botStar = false
     }) {
-        if (!channel) {
-            throw new Error('The starboard channel must be provided!');
-        }
-
+        if (!channel) throw new Error('The starboard channel must be provided!');
+        
         this._saveStarboard({ channel, starCount, emoji, selfStar, botStar });
     }
 
