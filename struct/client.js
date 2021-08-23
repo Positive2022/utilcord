@@ -1,20 +1,20 @@
-const { Client, Collection } = require('discord.js');
+const Discord = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const ms = require('parse-ms');
 
-class UtilsClient extends Client {
+class UtilsClient extends Discord.Client {
     constructor(options) {
         super(options);
-        this.commands = new Collection();
-        this.cooldowns = new Collection();
+        this.slashcommands = new Discord.Collection();
+        this.cooldowns = new Discord.Collection();
     }
 
     loadCommands(commandsDir) {
         const commands = require('require-all')(commandsDir);
 
         for (const [, command] of commands) {
-            this.commands.set(command);
+            this.slashcommands.set(command);
         }
     }
 
@@ -25,11 +25,11 @@ class UtilsClient extends Client {
             if (guildId) {
                 await rest.put(
                     Routes.applicationGuildCommands(thisId, guildId),
-                    { body: this.commands.map(command => command.data) }
+                    { body: this.slashcommands.map(command => command.data) }
                 );
 
                 const guild = await this.guilds.fetch(guildId);
-                const permissionCommands = this.commands.filter(
+                const permissionCommands = this.slashcommands.filter(
                     command => command.permissions
                 );
 
@@ -49,7 +49,7 @@ class UtilsClient extends Client {
                 }
             } else {
                 await rest.put(Routes.applicationCommands(thisId), {
-                    body: this.commands.map(command => command.data)
+                    body: this.slashcommands.map(command => command.data)
                 });
             }
         } catch (error) {
@@ -58,43 +58,41 @@ class UtilsClient extends Client {
     }
 
     handleCommand(interaction) {
-        const { options, commandName } = interaction;
+        if (!interaction.isCommand()) return;
 
-        const command = this.commands.get(commandName);
+        const command = this.slashcommands.get(interaction.commandName);
         if (!command) return;
 
         if (command.cooldown && typeof parseInt(command.cooldown) !== "number") throw new Error(`Cooldown should be a number.`)
 
-        const { cooldowns } = this;
-
-        if (!cooldowns.has(command.data.name)) {
-            cooldowns.set(command.data.name, new Collection());
+        if (!this.cooldowns.has(command.data.name)) {
+            this.cooldowns.set(command.data.name, new Discord.Collection());
         }
 
         const now = Date.now();
 
-        const timestamps = cooldowns.get(command.data.name);
+        const timestamps = this.cooldowns.get(command.data.name);
         const cooldownAmount = command.cooldown * 1000;
-
-        if (timestamps.has(interaction.user.id)) {
-            const expirationTime = timestamps.get(interaction.user.id) + cooldownAmount;
+// Allows to run two bots at single server without problem with cooldown.
+        if (timestamps.has(`${interaction.user.id}_${interaction.client.user.id}`)) { 
+            const expirationTime = timestamps.get(`${interaction.user.id}_${interaction.client.user.id}`) + cooldownAmount;
 
             if (now < expirationTime) {
                 const timeLeft = ms(expirationTime - now);
                 return interaction.reply({
-                    content: `Please wait ${timeLeft.minutes}m ${timeLeft.seconds}s before reusing the \`${command.data.name}\` command.`,
+                    content: `Please wait ${timeLeft.minutes == 0 ? `${timeLeft.seconds}s` : `${timeLeft.minutes}m ${timeLeft.seconds}s`} before reusing the \`${command.data.name}\` command.`,
                     ephemeral: true
                 });
             }
         }
 
-        timestamps.set(interaction.user.id, now);
+        timestamps.set(`${interaction.user.id}_${interaction.client.user.id}`, now);
         setTimeout(
-            () => timestamps.delete(interaction.user.id),
+            () => timestamps.delete(`${interaction.user.id}_${interaction.client.user.id}`),
             cooldownAmount
         );
 
-        command.execute(this, interaction, options);
+        command.execute(this, interaction, interaction.options);
     }
 }
 
