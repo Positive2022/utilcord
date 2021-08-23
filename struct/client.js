@@ -13,7 +13,7 @@ class UtilsClient extends Discord.Client {
     loadCommands(commandsDir) {
         const commands = require('require-all')(commandsDir);
 
-        for (const [, command] of commands) {
+        for (const [, command] of Object.entries(commands)) {
             this.slashcommands.set(command);
         }
     }
