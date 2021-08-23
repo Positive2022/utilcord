@@ -4,7 +4,7 @@ class Command {
         this.permissions = properties.permissions;
 
         this.cooldown = properties.cooldown;
-        this.execute = properties.execute;
+        this.execute =  properties.execute;
     }
 }
 

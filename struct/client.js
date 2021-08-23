@@ -57,7 +57,7 @@ class UtilsClient extends Discord.Client {
         }
     }
 
-    handleCommand(interaction, options = {}) {
+    async handleCommand(interaction, options = {}) {
         if (!interaction.isCommand()) return;
 
         const command = this.slashcommands.get(interaction.commandName);
@@ -92,7 +92,7 @@ class UtilsClient extends Discord.Client {
             cooldownAmount
         );
 
-        command.execute(this, interaction, options);
+        await command.execute(this, interaction, options);
     }
 }
 
