@@ -57,7 +57,7 @@ class UtilsClient extends Discord.Client {
         }
     }
 
-    handleCommand(interaction, options) {
+    handleCommand(interaction, options = {}) {
         if (!interaction.isCommand()) return;
 
         const command = this.slashcommands.get(interaction.commandName);
